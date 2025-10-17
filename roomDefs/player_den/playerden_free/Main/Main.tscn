@@ -1,0 +1,149 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvy7fmnyjy4oi"]
+
+[ext_resource type="Texture2D" uid="uid://dhom05lvon4gf" path="res://roomDefs/PlayerDenFree/Main/Assets/bg.png" id="1_vtc5f"]
+[ext_resource type="Texture2D" uid="uid://ddushkv11u7gp" path="res://roomDefs/PlayerDenFree/Main/Assets/YSort/House.png" id="2_6uv07"]
+[ext_resource type="Texture2D" uid="uid://cg88nwv6chqq0" path="res://roomDefs/PlayerDenFree/Main/Assets/YSort/Roof.png" id="3_ugqw2"]
+
+[sub_resource type="GDScript" id="GDScript_d7h7d"]
+resource_name = "Main"
+script/source = "extends Node2D
+
+var mainPath = \"user://RoomData/Main/Assets/\"
+var data = {\"music\":\"MusDenDef.mp3\",\"musicVol\":50,\"name\":\"Display Name\",\"denCatId\":7}
+signal init
+func ready() -> void:
+	emit_signal(\"init\")
+	get_node(\"Bg\").texture = getTexFromPath(\"bg.png\")
+
+func getFilesInFolder(path):
+	path = mainPath + path
+	var dir = DirAccess.open(path)
+	var tex := []
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != \"\":
+			if not dir.current_is_dir():
+				tex.append(path + \"/\" + file_name)
+			file_name = dir.get_next()
+		dir.list_dir_end()
+	return tex
+func sortByfileName(a:String,b:String):
+	var path = a.split(\"/\")[-1]
+	var num_a = int(a.split(\"/\")[-1])
+	var num_b = int(b.split(\"/\")[-1])
+	
+	return num_a < num_b
+func getTexFromPath(path):
+	print(\"REQUESTING PATH FROM HERE \" + path)
+	return ImageTexture.create_from_image(Image.load_from_file(mainPath + path))
+
+func getTexFromFiles(files:Array):
+	files.sort_custom(sortByfileName)
+	var textur := AnimatedTexture.new()
+	var frame = 0
+	textur.frames = files.size()
+	textur.speed_scale = 24
+	for tex in files:
+		var img = Image.load_from_file(tex)
+		textur.set_frame_texture(frame,ImageTexture.create_from_image(img))
+		frame += 1
+	return textur
+"
+
+[sub_resource type="GDScript" id="GDScript_vsies"]
+resource_name = "textureSet"
+script/source = "extends Node2D
+
+
+var folderPath = \"YSort/\"
+var inYsort = true
+var parent = null
+
+signal node_ready
+
+func ready() -> void:
+	parent.connect(\"init\",init)
+func init():
+	get_node(\"house\").texture = parent.getTexFromPath(folderPath + \"House.png\")
+	get_node(\"roof\").texture = parent.getTexFromPath(folderPath + \"Roof.png\")
+"
+
+[node name="PlayerDenFree" type="Node2D"]
+y_sort_enabled = true
+script = SubResource("GDScript_d7h7d")
+
+[node name="Bg" type="TextureRect" parent="."]
+texture_filter = 3
+offset_left = 32.0
+offset_top = 52.0
+offset_right = 5792.0
+offset_bottom = 3067.0
+scale = Vector2(0.333, 0.333)
+mouse_filter = 2
+texture = ExtResource("1_vtc5f")
+
+[node name="Spawns" type="Sprite2D" parent="."]
+position = Vector2(32, 52)
+
+[node name="default" type="Marker2D" parent="Spawns"]
+position = Vector2(577, 640)
+
+[node name="extra" type="Node2D" parent="."]
+position = Vector2(779, 2142)
+script = SubResource("GDScript_vsies")
+
+[node name="TextureRect" type="TextureRect" parent="extra"]
+visible = false
+texture_filter = 1
+offset_left = 485.0
+offset_top = -1329.0
+offset_right = 525.0
+offset_bottom = -1289.0
+
+[node name="house" type="Sprite2D" parent="extra"]
+texture_filter = 1
+position = Vector2(557, -1864)
+scale = Vector2(0.333, 0.333)
+texture = ExtResource("2_6uv07")
+offset = Vector2(0, 700)
+
+[node name="roof" type="Sprite2D" parent="extra"]
+texture_filter = 1
+position = Vector2(233, -1170)
+scale = Vector2(0.333, 0.333)
+texture = ExtResource("3_ugqw2")
+offset = Vector2(0, -2000)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1472, 810)
+zoom = Vector2(1.167, 1.167)
+limit_left = 32
+limit_top = 52
+limit_right = 1948
+limit_bottom = 1052
+position_smoothing_speed = 14.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
+
+[node name="Collision" type="Node2D" parent="."]
+position = Vector2(32, 52)
+
+[node name="Top" type="StaticBody2D" parent="Collision"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/Top"]
+polygon = PackedVector2Array(720.916, 502.367, 711, 332, 756, 272, 764, 230, 633, 163, 403, 163, 185, 168, 83, 225, 1, 190, 1, 2, 1917, 3, 1942, 848, 1916, 848, 1916, 613.586, 1904, 588, 1871, 580, 1660, 691, 1612, 669, 1794, 571, 1791.56, 553.044, 1573, 434, 1525.74, 435.477, 1397, 518, 1144.34, 366.584, 1100.76, 363.231, 784, 543, 736.219, 526.045)
+
+[node name="Middle" type="StaticBody2D" parent="Collision"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/Middle"]
+polygon = PackedVector2Array(879, 603, 1339, 874, 1521, 763, 1494, 738, 1370, 816, 1313, 818, 898, 569, 880, 578)
+
+[node name="Bottom" type="StaticBody2D" parent="Collision"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/Bottom"]
+polygon = PackedVector2Array(24, 198, -2, 205, 2, 974, 25, 999, 1889.52, 999.067, 1917, 978, 1917, 849, 1941, 847, 1939, 1020, -28, 1020, -32, 181)
