@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvy7fmnyjy4oi"]
+[gd_scene load_steps=5 format=3 uid="uid://bvy7fmnyjy4oi"]
 
 [ext_resource type="Texture2D" uid="uid://dhom05lvon4gf" path="res://roomDefs/PlayerDenFree/Main/Assets/bg.png" id="1_vtc5f"]
 [ext_resource type="Texture2D" uid="uid://ddushkv11u7gp" path="res://roomDefs/PlayerDenFree/Main/Assets/YSort/House.png" id="2_6uv07"]
@@ -8,65 +8,12 @@
 resource_name = "Main"
 script/source = "extends Node2D
 
-var mainPath = \"user://RoomData/Main/Assets/\"
+#var mainPath = \"user://RoomData/Main/Assets/\"
 var data = {\"music\":\"MusDenDef.mp3\",\"musicVol\":50,\"name\":\"Display Name\",\"denCatId\":7}
 signal init
 func ready() -> void:
 	emit_signal(\"init\")
-	get_node(\"Bg\").texture = getTexFromPath(\"bg.png\")
-
-func getFilesInFolder(path):
-	path = mainPath + path
-	var dir = DirAccess.open(path)
-	var tex := []
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != \"\":
-			if not dir.current_is_dir():
-				tex.append(path + \"/\" + file_name)
-			file_name = dir.get_next()
-		dir.list_dir_end()
-	return tex
-func sortByfileName(a:String,b:String):
-	var path = a.split(\"/\")[-1]
-	var num_a = int(a.split(\"/\")[-1])
-	var num_b = int(b.split(\"/\")[-1])
-	
-	return num_a < num_b
-func getTexFromPath(path):
-	print(\"REQUESTING PATH FROM HERE \" + path)
-	return ImageTexture.create_from_image(Image.load_from_file(mainPath + path))
-
-func getTexFromFiles(files:Array):
-	files.sort_custom(sortByfileName)
-	var textur := AnimatedTexture.new()
-	var frame = 0
-	textur.frames = files.size()
-	textur.speed_scale = 24
-	for tex in files:
-		var img = Image.load_from_file(tex)
-		textur.set_frame_texture(frame,ImageTexture.create_from_image(img))
-		frame += 1
-	return textur
-"
-
-[sub_resource type="GDScript" id="GDScript_vsies"]
-resource_name = "textureSet"
-script/source = "extends Node2D
-
-
-var folderPath = \"YSort/\"
-var inYsort = true
-var parent = null
-
-signal node_ready
-
-func ready() -> void:
-	parent.connect(\"init\",init)
-func init():
-	get_node(\"house\").texture = parent.getTexFromPath(folderPath + \"House.png\")
-	get_node(\"roof\").texture = parent.getTexFromPath(folderPath + \"Roof.png\")
+	#get_node(\"Bg\").texture = getTexFromPath(\"bg.png\")
 "
 
 [node name="PlayerDenFree" type="Node2D"]
@@ -91,7 +38,6 @@ position = Vector2(577, 640)
 
 [node name="extra" type="Node2D" parent="."]
 position = Vector2(779, 2142)
-script = SubResource("GDScript_vsies")
 
 [node name="TextureRect" type="TextureRect" parent="extra"]
 visible = false
