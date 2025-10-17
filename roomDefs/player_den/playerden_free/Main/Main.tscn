@@ -39,14 +39,6 @@ position = Vector2(577, 640)
 [node name="extra" type="Node2D" parent="."]
 position = Vector2(779, 2142)
 
-[node name="TextureRect" type="TextureRect" parent="extra"]
-visible = false
-texture_filter = 1
-offset_left = 485.0
-offset_top = -1329.0
-offset_right = 525.0
-offset_bottom = -1289.0
-
 [node name="house" type="Sprite2D" parent="extra"]
 texture_filter = 1
 position = Vector2(557, -1864)
@@ -54,7 +46,10 @@ scale = Vector2(0.333, 0.333)
 texture = ExtResource("2_6uv07")
 offset = Vector2(0, 700)
 
-[node name="roof" type="Sprite2D" parent="extra"]
+[node name="YSort" type="Node2D" parent="."]
+position = Vector2(779, 2142)
+
+[node name="roof" type="Sprite2D" parent="YSort"]
 texture_filter = 1
 position = Vector2(233, -1170)
 scale = Vector2(0.333, 0.333)
