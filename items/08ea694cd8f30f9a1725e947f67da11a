@@ -59,9 +59,9 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_am31i")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_7skmm")
 
 [node name="_AnimatedSprite2D_12" type="AnimatedSprite2D" parent="."]
-position = Vector2(28, 82)
+position = Vector2(27, 45)
 scale = Vector2(0.333333, 0.333333)
 sprite_frames = SubResource("SpriteFrames_oghno")
 
 [node name="y_sort_point" type="Marker2D" parent="."]
-position = Vector2(-59, 34)
+position = Vector2(-63, -1)

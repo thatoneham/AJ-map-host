@@ -59,7 +59,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_tt16m")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_j7ly0")
 
 [node name="_AnimatedSprite2D_23" type="AnimatedSprite2D" parent="."]
-position = Vector2(26, 46)
+position = Vector2(26, 45)
 scale = Vector2(0.333333, 0.333333)
 sprite_frames = SubResource("SpriteFrames_3plny")
 
