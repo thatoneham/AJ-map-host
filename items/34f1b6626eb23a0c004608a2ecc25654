@@ -90,6 +90,7 @@ animations = [{
 
 [node name="Chair" type="Node2D"]
 script = SubResource("GDScript_6e4p7")
+metadata/ysort_ref = "y_sort_point"
 
 [node name="Mouse collision" type="Button" parent="."]
 offset_left = -44.4297
@@ -118,3 +119,6 @@ sprite_frames = SubResource("SpriteFrames_xftaf")
 position = Vector2(-1.7, -13.5)
 scale = Vector2(0.333333, 0.333333)
 sprite_frames = SubResource("SpriteFrames_4rycq")
+
+[node name="y_sort_point" type="Marker2D" parent="."]
+position = Vector2(0, 12)

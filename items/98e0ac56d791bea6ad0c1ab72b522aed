@@ -44,6 +44,7 @@ animations = [{
 
 [node name="Couch" type="Node2D"]
 script = SubResource("GDScript_6e4p7")
+metadata/ysort_ref = "y_sort_point"
 
 [node name="Mouse collision" type="Button" parent="."]
 offset_left = -131.0
@@ -58,6 +59,9 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_tt16m")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_j7ly0")
 
 [node name="_AnimatedSprite2D_23" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 13)
+position = Vector2(-20, -3.8147e-06)
 scale = Vector2(0.333333, 0.333333)
 sprite_frames = SubResource("SpriteFrames_3plny")
+
+[node name="y_sort_point" type="Marker2D" parent="."]
+position = Vector2(-69, 15)
