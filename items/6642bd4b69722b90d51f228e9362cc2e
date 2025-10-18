@@ -32,8 +32,12 @@ animations = [{
 
 [node name="PlushieRedPanda" type="Node2D"]
 script = SubResource("GDScript_6e4p7")
+metadata/ysort_ref = &"y_sort_point"
 
-[node name="_AnimatedSprite2D_12" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -30.1)
+[node name="y_sort_point" type="Marker2D" parent="."]
+position = Vector2(26.9969, 46.0024)
+
+[node name="_AnimatedSprite2D_13" type="AnimatedSprite2D" parent="."]
+position = Vector2(28.2, 14.6)
 scale = Vector2(0.333333, 0.333333)
 sprite_frames = SubResource("SpriteFrames_ny48w")
