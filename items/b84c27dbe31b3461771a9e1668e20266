@@ -1,9 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://uhdsc5nrholl"]
+[gd_scene load_steps=21 format=3 uid="uid://c1ukrr4ppqj8a"]
 
 [sub_resource type="GDScript" id="GDScript_lrqpt"]
 script/source = "
 extends Node2D
-var versions = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+var versions = [1, 2, 3, 4, 5, 6, 7, 8, 9,10]
 
 func playVersion(ver:int):
 	for child in get_children():
@@ -19,7 +19,7 @@ func setVersion(param1:int):
 	if param1 >= getVersions().size():
 		playVersion(1)
 	else:
-		playVersion(param1 + 1)
+		playVersion(param1)
 	
 "
 
@@ -221,7 +221,7 @@ metadata/contentHeight = 76.0
 position = Vector2(33, 38)
 scale = Vector2(0.333333, 0.333333)
 sprite_frames = SubResource("SpriteFrames_4c3x4")
-animation = &"5"
+animation = &"1"
 
 [node name="y_sort_point" type="Marker2D" parent="."]
 position = Vector2(27.3116, 68.1135)
