@@ -1,0 +1,285 @@
+[gd_scene load_steps=15 format=3 uid="uid://pk5rkbo3cers"]
+
+[ext_resource type="Texture2D" uid="uid://cxaxhtswjmnrw" path="res://roomDefs/WorldMap/Assets/WorldMapBg.svg" id="1_g8gjw"]
+[ext_resource type="Texture2D" uid="uid://cllk8qyc454m5" path="res://roomDefs/WorldMap/Assets/Buttons/DenBtBg.svg" id="2_3srn0"]
+[ext_resource type="Texture2D" uid="uid://yaos47rgrvuv" path="res://roomDefs/WorldMap/Assets/Buttons/DenBt.svg" id="3_014s3"]
+[ext_resource type="Texture2D" uid="uid://unojx8mj7jke" path="res://roomDefs/WorldMap/Assets/WorldMap.jpg" id="3_ybdpi"]
+[ext_resource type="Texture2D" uid="uid://b5cqgb7yq2bhq" path="res://roomDefs/WorldMap/Assets/Buttons/DenBtPressed.svg" id="4_x5n75"]
+[ext_resource type="Texture2D" uid="uid://doaxvcj2hpy6t" path="res://roomDefs/WorldMap/Assets/Buttons/DenBtHovered.svg" id="5_bp3vr"]
+[ext_resource type="Texture2D" uid="uid://bpewumov3q7ag" path="res://roomDefs/WorldMap/Assets/Buttons/BlueClose/Close.svg" id="6_cxpls"]
+[ext_resource type="Texture2D" uid="uid://cfavwrbyh7wu6" path="res://roomDefs/WorldMap/Assets/Buttons/BlueClose/ClosePressed.svg" id="7_evwrw"]
+[ext_resource type="Texture2D" uid="uid://dpr7weceb240j" path="res://roomDefs/WorldMap/Assets/Buttons/BlueClose/CloseHovered.svg" id="8_5xhcc"]
+[ext_resource type="FontFile" uid="uid://dm5rjb2ag2cuj" path="res://Fonts/tiki-island/Tiki-Island.woff" id="9_8tc7w"]
+[ext_resource type="Texture2D" uid="uid://dj8x6bq1ch305" path="res://roomDefs/WorldMap/Assets/MapButtons/JamaaHighlight.png" id="11_ja11d"]
+[ext_resource type="Texture2D" uid="uid://b7rrppjvf6um5" path="res://roomDefs/WorldMap/Assets/MapButtons/CrySandsHighlight.png" id="13_yjotq"]
+[ext_resource type="Texture2D" uid="uid://b7h21k8rlnpks" path="res://roomDefs/WorldMap/Assets/MapButtons/CoralCanHighlight.png" id="15_lmdeo"]
+
+[sub_resource type="GDScript" id="GDScript_d7h7d"]
+resource_name = "Main"
+script/source = "extends Control
+
+var mainPath = \"user://RoomData/WorldMap/Assets/\"
+signal init
+var locations = [
+  { \"name\": \"jamaa_township\", \"message\": \"jamaa_township.room_main\" },
+  { \"name\": \"crystal_sands\", \"message\": \"crystal_sands.room_main\" },
+  { \"name\": \"lost_temple_of_zios\", \"message\": \"lost_temple_of_zios.room_main\" },
+  { \"name\": \"sarepia\", \"message\": \"sarepia.room_main\" },
+  { \"name\": \"close\", \"message\": \"close\" },
+  { \"name\": \"coral_canyons\", \"message\": \"coral_canyons.room_main\" },
+  { \"name\": \"mountains_of_shivveer\", \"message\": \"mountains_of_shivveer.room_main\" },
+  { \"name\": \"appondale\", \"message\": \"appondale.room_main\" },
+  { \"name\": \"petshop%petshopicons%shopicons\", \"message\": \"appondale.pet_shop\" },
+  { \"name\": \"crystal_reef\", \"message\": \"oceans.crystal_reef\" },
+  { \"name\": \"deep_sea\", \"message\": \"oceans.deep_sea\" },
+  { \"name\": \"bahari_bay\", \"message\": \"oceans.bahari_bay\" },
+  { \"name\": \"pirate_ship\", \"message\": \"pirate_ship.room_main\" },
+  { \"name\": \"tierneyquarium%cinemaicons\", \"message\": \"crystal_sands.room_tierney\" },
+  { \"name\": \"solarcade%shopicons\", \"message\": \"jamaa_township.room_arcade\" },
+  { \"name\": \"bb_highlight%cinemaicons\", \"message\": \"lost_temple_of_zios.brady_barr\" },
+  { \"name\": \"aussie\", \"message\": \"aussie.room_main\" },
+  { \"name\": \"auspital\", \"message\": \"aussie.room_hos\" },
+  { \"name\": \"secret\", \"message\": \"lost_temple_of_zios.room_chamberbase\" }
+]
+func ready() -> void:
+	emit_signal(\"init\")
+	get_node(\"Bg\").texture = getTexFromPath(\"WorldMapBg.png\")
+	get_node(\"Bg/MapBg\").texture = getTexFromPath(\"WorldMap.jpg\")
+	
+	get_node(\"Bg/Content/DenBtBg\").texture = getTexFromPath(\"Buttons/DenBtBg.svg\")
+	get_node(\"Bg/Content/DenBtBg/DenBt\").texture_normal = getTexFromPath(\"Buttons/DenBt.svg\")
+	get_node(\"Bg/Content/DenBtBg/DenBt\").texture_hover = getTexFromPath(\"Buttons/DenBtHovered.svg\")
+	get_node(\"Bg/Content/DenBtBg/DenBt\").texture_pressed = getTexFromPath(\"Buttons/DenBtPressed.svg\")
+	
+	get_node(\"Bg/Content/CloseBt\").texture_normal = getTexFromPath(\"Buttons/BlueClose/Close.svg\")
+	get_node(\"Bg/Content/CloseBt\").texture_hover = getTexFromPath(\"Buttons/BlueClose/CloseHovered.svg\")
+	get_node(\"Bg/Content/CloseBt\").texture_pressed = getTexFromPath(\"Buttons/BlueClose/ClosePressed.svg\")
+
+	get_node(\"Bg/Crystal\").texture_hover = getTexFromPath(\"MapButtons/CrySandsHighlight.png\")
+	get_node(\"Bg/Crystal\").texture_click_mask = getBitFromPath(\"MapButtons/CrystalSanMask.svg\")
+	
+	get_node(\"Bg/Coral\").texture_hover = getTexFromPath(\"MapButtons/CoralCanHighlight.png\")
+	get_node(\"Bg/Coral\").texture_click_mask = getBitFromPath(\"MapButtons/CoralCanMask.svg\")
+	
+	get_node(\"Bg/Jamaa\").texture_hover = getTexFromPath(\"MapButtons/JamaaHighlight.png\")
+	get_node(\"Bg/Jamaa\").texture_click_mask = getBitFromPath(\"MapButtons/JamaaMask.svg\")
+	
+func getFilesInFolder(path):
+	path = mainPath + path
+	var dir = DirAccess.open(path)
+	var tex := []
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != \"\":
+			if not dir.current_is_dir():
+				tex.append(path + \"/\" + file_name)
+			file_name = dir.get_next()
+		dir.list_dir_end()
+	return tex
+func sortByfileName(a:String,b:String):
+	var path = a.split(\"/\")[-1]
+	var num_a = int(a.split(\"/\")[-1])
+	var num_b = int(b.split(\"/\")[-1])
+	
+	return num_a < num_b
+func getTexFromPath(path):
+	var img = null
+	if path.ends_with(\".svg\"):
+		var dat = Image.load_from_file(mainPath + path).get_data()
+		img = Image.new()
+		img.load_svg_from_buffer(dat,3.0)
+	else:
+		img = Image.load_from_file(mainPath + path)
+	return ImageTexture.create_from_image(Image.load_from_file(mainPath + path))
+
+func getBitFromPath(path):
+	var bit := BitMap.new()
+	bit.create_from_image_alpha(Image.load_from_file(mainPath + path),0.5)
+	return ImageTexture.create_from_image(bit.convert_to_image())
+
+func getTexFromFiles(files:Array):
+	files.sort_custom(sortByfileName)
+	var textur := AnimatedTexture.new()
+	var frame = 0
+	textur.frames = files.size()
+	textur.speed_scale = 24
+	for tex in files:
+		var img = Image.load_from_file(tex)
+		textur.set_frame_texture(frame,ImageTexture.create_from_image(img))
+		frame += 1
+	return textur
+"
+
+[node name="WorldMap" type="Control"]
+y_sort_enabled = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_d7h7d")
+
+[node name="Bg" type="TextureRect" parent="."]
+z_as_relative = false
+texture_filter = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -590.0
+offset_top = -360.0
+offset_right = 588.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_g8gjw")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Bg"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -148.5
+offset_top = 25.0
+offset_right = 148.5
+offset_bottom = 66.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.329412, 0.133333, 0.0627451, 1)
+theme_override_fonts/font = ExtResource("9_8tc7w")
+theme_override_font_sizes/font_size = 35
+text = "World Map"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MapBg" type="TextureRect" parent="Bg"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = 73.0
+offset_right = -29.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ybdpi")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Content" type="Control" parent="Bg"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DenBtBg" type="TextureRect" parent="Bg/Content"]
+layout_mode = 1
+offset_left = 73.0
+offset_top = 4.0
+offset_right = 171.0
+offset_bottom = 91.0
+texture = ExtResource("2_3srn0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DenBt" type="TextureButton" parent="Bg/Content/DenBtBg"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.0
+offset_top = -35.5
+offset_right = 38.0
+offset_bottom = 40.5
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_014s3")
+texture_pressed = ExtResource("4_x5n75")
+texture_hover = ExtResource("5_bp3vr")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="CloseBt" type="TextureButton" parent="Bg/Content"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -70.0
+offset_top = 8.0
+offset_right = -10.0
+offset_bottom = 68.0
+grow_horizontal = 0
+texture_normal = ExtResource("6_cxpls")
+texture_pressed = ExtResource("7_evwrw")
+texture_hover = ExtResource("8_5xhcc")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Jamaa" type="TextureButton" parent="Bg"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -321.0
+offset_top = -105.0
+offset_right = 21.0
+offset_bottom = 147.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_hover = ExtResource("11_ja11d")
+ignore_texture_size = true
+stretch_mode = 5
+metadata/goTo = "jamaa_township.room_main"
+metadata/walkTo = false
+
+[node name="Crystal" type="TextureButton" parent="Bg"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 136.0
+offset_top = -75.0
+offset_right = 464.0
+offset_bottom = 171.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_hover = ExtResource("13_yjotq")
+ignore_texture_size = true
+stretch_mode = 5
+metadata/walkTo = false
+metadata/goTo = "crystal_sands.room_main"
+
+[node name="Coral" type="TextureButton" parent="Bg"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 146.0
+offset_top = -277.0
+offset_right = 444.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_hover = ExtResource("15_lmdeo")
+ignore_texture_size = true
+stretch_mode = 5
+metadata/goTo = "coral_canyons.room_main"
+metadata/walkTo = false
