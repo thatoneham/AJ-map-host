@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://pk5rkbo3cers"]
+[gd_scene load_steps=17 format=3 uid="uid://pk5rkbo3cers"]
 
 [ext_resource type="Texture2D" uid="uid://cxaxhtswjmnrw" path="res://roomDefs/WorldMap/Assets/WorldMapBg.svg" id="1_g8gjw"]
 [ext_resource type="Texture2D" uid="uid://cllk8qyc454m5" path="res://roomDefs/WorldMap/Assets/Buttons/DenBtBg.svg" id="2_3srn0"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://dpr7weceb240j" path="res://roomDefs/WorldMap/Assets/Buttons/BlueClose/CloseHovered.svg" id="8_5xhcc"]
 [ext_resource type="FontFile" uid="uid://dm5rjb2ag2cuj" path="res://Fonts/tiki-island/Tiki-Island.woff" id="9_8tc7w"]
 [ext_resource type="Texture2D" uid="uid://dj8x6bq1ch305" path="res://roomDefs/WorldMap/Assets/MapButtons/JamaaHighlight.png" id="11_ja11d"]
+[ext_resource type="Texture2D" uid="uid://b2kclulhwyl6m" path="res://roomDefs/WorldMap/Assets/MapButtons/SarepiaHighlight.png" id="12_04d6g"]
+[ext_resource type="BitMap" uid="uid://bf5we7pceld3d" path="res://roomDefs/WorldMap/Assets/MapButtons/SarepiaMask.svg" id="13_ffkms"]
 [ext_resource type="Texture2D" uid="uid://b7rrppjvf6um5" path="res://roomDefs/WorldMap/Assets/MapButtons/CrySandsHighlight.png" id="13_yjotq"]
 [ext_resource type="Texture2D" uid="uid://b7h21k8rlnpks" path="res://roomDefs/WorldMap/Assets/MapButtons/CoralCanHighlight.png" id="15_lmdeo"]
 
@@ -244,6 +246,26 @@ texture_hover = ExtResource("11_ja11d")
 ignore_texture_size = true
 stretch_mode = 5
 metadata/goTo = "jamaa_township.room_main"
+metadata/walkTo = false
+
+[node name="Sarepia" type="TextureButton" parent="Bg"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -145.0
+offset_top = -271.0
+offset_right = 235.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_hover = ExtResource("12_04d6g")
+texture_click_mask = ExtResource("13_ffkms")
+ignore_texture_size = true
+stretch_mode = 5
+metadata/goTo = "sarepia.room_main"
 metadata/walkTo = false
 
 [node name="Crystal" type="TextureButton" parent="Bg"]
