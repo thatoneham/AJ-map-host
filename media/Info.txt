@@ -1,7 +1,74 @@
-if people are confused what some of these files are heres a list of some that i noted
+if people are confused what these files are and what those weird names mean.
+they are hashed names used by animal jam for whatever reason.
 
-9a762900f6354c5c9532fe674775f289 -> Non member daily spin
+the names are generated with a md5 hash with a salt which is `W3 7r4Ck h4X0r3rs`
 
-b701512ead354e3a798f59d3ef3d9d88 -> master piece no frame
+so  `W3 7r4Ck h4X0r3rs + id`
+then we take each index of the strings letters, 
 
-762b4033dccc3d533ffc4deee0cf842a -> master piece buy thing / viewer
+every even index we add the letter to the back.
+for every odd index we move the letter to the front
+
+for example, 12345 will turn into 42135
+
+step by step is
+
+1 > back
+2 > front
+3 > back
+4 > front
+5 > back
+
+then we md5 hash to hex string. to get
+
+with this logic if we want the cdn for the member daily spin
+
+1. get start string `W3 7r4Ck h4X0r3rs5533`
+
+2. shift them. `35rrXhk473W rC 403s53`
+
+3. md5 hash it `1fd71a0d2baf5794d67cd9413596111c`
+
+and thats it
+
+
+
+
+
+heres a list of some that i noted
+
+
+Member spin - 1fd71a0d2baf5794d67cd9413596111c - 5533
+
+
+Non member spin - 9a762900f6354c5c9532fe674775f289 - 1025
+
+
+master piece no frame - b701512ead354e3a798f59d3ef3d9d88
+
+
+master piece buy thing / viewer - 762b4033dccc3d533ffc4deee0cf842a
+
+
+
+# trade related
+
+
+TradeReviewConfirmPopup - 0254bc137b812b0d88f34d7ce7647e63 - 4432
+
+
+TradeRequested - d1e9350677e2369e5bbea4ab680d2223 - 431
+
+
+RequestSent - 82787026d0d21649c84c6fecd6c34a7b - 4456
+
+
+RequestTrade - a75883dc26901271d3f69d6c5f8aca83 - 430
+
+
+TradeDone - 791cf4b10621019a6855f809aae57864 - 432
+
+
+TradeAudio - 910695afbf2cb493cc79a6c10fc1376b - 1333
+
+
